@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reply">
+            <h2><span>Reply</span> {{reply.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{reply.date}}</span>
+                </dd>
+                <dt><span>Response Info</span></dt>
+                <dd>
+                    <span>{{reply.responseInfo}}</span>
+                </dd>
+                <dt><span>Tender</span></dt>
+                <dd>
+                    <div *ngIf="reply.tender">
+                        <a [routerLink]="['/tender', reply.tender?.id, 'view']">{{reply.tender?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Supplier</span></dt>
+                <dd>
+                    <div *ngIf="reply.supplier">
+                        <a [routerLink]="['/supplier', reply.supplier?.id, 'view']">{{reply.supplier?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/reply', reply.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

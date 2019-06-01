@@ -1,0 +1,40 @@
+entity Tender {
+  title String required
+  description String
+  info AnyBlob
+}
+
+entity Reply {
+  date Instant required
+  responseInfo String required
+}
+
+entity Supplier {
+  firstName String required
+  lastName String required
+  email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+}
+
+entity Admin {
+  firstName String required
+  lastName String required
+  email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+}
+
+relationship OneToOne {
+    Admin{user} to User,
+    Supplier{user} to User
+}
+
+relationship ManyToOne {
+  Reply{tender} to Tender
+}
+
+relationship OneToMany {
+  Admin{tender} to Tender{admin},
+  Supplier{reply} to Reply{supplier},
+}
+
+
+service * with serviceClass
+paginate Tender, Reply with pagination
